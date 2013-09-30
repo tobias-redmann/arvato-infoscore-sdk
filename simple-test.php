@@ -26,6 +26,15 @@ $customer_attrs = array(
 
 $customer = new Customer($customer_attrs);
 
-var_dump($infoscore->checkES15($customer));
+$response = $infoscore->checkES15($customer);
+
+if ($response !== false && $response->isValid()) {
+  
+  var_dump($response->isGreen());
+  
+}
+
+
+var_dump($customer->getRawData());
 
 ?>

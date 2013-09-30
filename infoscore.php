@@ -258,6 +258,8 @@ class Infoscore{
       
       parse_str($result, $raw_data);
       
+      curl_close($ch);
+      
       return $raw_data;
       
     } else {
@@ -292,14 +294,77 @@ class Infoscore{
       
       $fields = $this->buildFields('ES0015', $customer, $service_attributes);
       
-      var_dump($fields);
+      $raw_data_response = $this->requestService($fields);
       
-      var_dump($this->requestService($fields));
+      if ($raw_data_response === false) {
+        
+        return false;
+        
+      }
+      
+      return new Response('ES0015', $customer, $raw_data_response);
+      
+    } else {
+      
+      return false;
+      
+    }
+    
+  }
+  
+  
+}
+
+class Response {
+  
+  private $serviceName = null;
+  private $raw_data = null;
+  
+  function __construct($serviceName, $customer ,$raw_data) {
+    
+    $this->serviceName = $serviceName;
+    $this->raw_data = $raw_data;
+    
+  }
+  
+  /**
+   * Is the response a valid response?
+   * 
+   * @return boolean
+   */
+  function isValid() {
+    
+    if (isset($this->raw_data['RC']) && $this->raw_data['RC'] == '0') {
+      
+      return true;
+      
+    } else {
+      
+      return false;
+      
+    }
+    
+  }
+  
+  
+  function isGreen() {
+    
+    if (isset($this->raw_data['eScoreValue'])) {
+      
+      if ( $this->raw_data['eScoreValue'] == 'G' ) {
+        
+        return true;
+        
+      } else {
+        
+        return false;
+        
+      }
       
       
     } else {
       
-      var_dump($this->errors);
+      return null;
       
     }
     
@@ -360,6 +425,11 @@ class Customer {
     
   }
   
+  public function getRawData() {
+    
+    return get_object_vars($this);
+    
+  }
   
   
 }
