@@ -168,7 +168,7 @@ class Infoscore{
     
   }
   
-  private function getRequestUrl($serviceName, $customer, $serviceAttributes) {
+  private function buildFields($serviceName, $customer, $serviceAttributes) {
     
     $allowed_customer_params = array();
     $allowed_service_params = array();
@@ -187,17 +187,7 @@ class Infoscore{
     
     $url = '';
     
-    if ($this->isSandbox()) {
-      
-      $url .= $this->sandbox_url;
-      
-    } else {
-      
-      $url .= $this->production_url;
-      
-    }
-    
-    $url .= '?Service='. $serviceName;
+    $url .= 'Service='. $serviceName;
     
     foreach($allowed_service_params as $asp) {
       
@@ -236,10 +226,33 @@ class Infoscore{
     return $url;
     
     
-    
-    
   }
   
+  
+  private function requestService($fields) {
+    
+    if ($this->isSandbox()) {
+      
+      $url .= $this->sandbox_url;
+      
+    } else {
+      
+      $url .= $this->production_url;
+      
+    }
+    
+    $ch = curl_init();
+    
+    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields);
+    
+    $result = curl_exec($ch);
+    
+    curl_close($ch);
+    
+    return $result;
+    
+  }  
   
   public function checkES15($customer, $attrs = array()) {
     
@@ -259,11 +272,11 @@ class Infoscore{
     
     if ($service_params_ok === true && $customer_params_ok === true && $service_attributes_ok) {
       
-      $url = $this->getRequestUrl('ES0015', $customer, $service_attributes);
+      $fields = $this->buildFields('ES0015', $customer, $service_attributes);
       
-      $response = file_get_contents($url);
+      var_dump($fields);
       
-      var_dump($response);
+      var_dump($this->requestService($fields));
       
       
     } else {
