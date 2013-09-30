@@ -15,11 +15,12 @@ $infoscore = new Infoscore($attrs);
 var_dump($infoscore);
 
 $customer_attrs = array(
-    'LastName'  => 'Redmann',
-    'FirstName' => 'Tobias',
-    'Street'    => 'Hocksteinweg',
-    'City'      => 'Berlin',
-    'ZIP'       => '14165',
+    'LastName'  => 'Lotter',
+    'FirstName' => 'Ingrid',
+    'Street'    => 'Kemptener Str.',
+    'City'      => 'Lindau',
+    'ZIP'       => '88131',
+    'House'     => '70A',
     'Country'   => 'de'
 );
 
