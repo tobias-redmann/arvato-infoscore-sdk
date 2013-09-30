@@ -6,8 +6,8 @@ include('infoscore.php');
  * Creating the Service Object 
  */
 $attrs = array(
-    'PartnerNo'   => '22',
-    'PartnerCode' => 'jjjj'
+    'PartnerNo'   => '69999',
+    'PartnerCode' => '69990600'
 );
 
 $infoscore = new Infoscore($attrs);
