@@ -347,6 +347,41 @@ class Response {
   }
   
   
+  function getHistory() {
+    
+    $history = array();
+    
+    for($i=1; $i<=5; $i++) {
+      
+      $var = 'Feature'. $i;
+      $var_date = 'FeatureDate'.$i;
+      
+      if (isset($this->raw_data[$var])) {
+        
+        $feature = array();
+        
+        $feature['abbr']  = $this->raw_data[$var];
+        $feature['date']  = $this->raw_data[$var_date];
+        $feature['text']  = 'Hier kommt der Text';
+        
+        $history[] = $feature;
+        
+      }
+      
+      
+    }
+    
+    return $history;
+    
+  }
+  
+  function getStatus() {
+    
+    return $this->raw_data['eScoreValue'];
+    
+  }
+  
+  
   function isGreen() {
     
     if (isset($this->raw_data['eScoreValue'])) {

@@ -30,7 +30,17 @@ $response = $infoscore->checkES15($customer);
 
 if ($response !== false && $response->isValid()) {
   
-  var_dump($response->isGreen());
+  if($response->isGreen()) {
+    
+    echo 'OK';
+    
+  } else {
+    
+    echo 'Status: ' . $response->getStatus();
+    
+    var_dump($response->getHistory());
+    
+  }
   
 }
 
