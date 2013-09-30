@@ -254,7 +254,9 @@ class Infoscore{
     
     if ($result !== false) {
       
-      $raw_data = parse_str($result);
+      $raw_data = array();
+      
+      parse_str($result, $raw_data);
       
       return $raw_data;
       
