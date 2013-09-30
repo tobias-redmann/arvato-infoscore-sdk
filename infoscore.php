@@ -246,6 +246,9 @@ class Infoscore{
     curl_setopt($ch,CURLOPT_URL, $url);
     curl_setopt($ch,CURLOPT_POSTFIELDS, $fields);
     
+    // cert is not valid
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    
     $result = curl_exec($ch);
     
     var_dump(curl_error($ch));
