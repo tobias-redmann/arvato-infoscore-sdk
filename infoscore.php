@@ -1,5 +1,5 @@
 <?php
-
+include('messages.php');
 
 class Infoscore{
   
@@ -349,6 +349,8 @@ class Response {
   
   function getHistory() {
     
+    global $boni_responses;
+    
     $history = array();
     
     for($i=1; $i<=5; $i++) {
@@ -362,7 +364,7 @@ class Response {
         
         $feature['abbr']  = $this->raw_data[$var];
         $feature['date']  = $this->raw_data[$var_date];
-        $feature['text']  = 'Hier kommt der Text';
+        $feature['text']  = $boni_responses[$var];
         
         $history[] = $feature;
         
