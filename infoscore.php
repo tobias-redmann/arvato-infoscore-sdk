@@ -349,7 +349,6 @@ class Response {
   
   function getHistory() {
     
-    global $boni_responses;
     
     $history = array();
     
@@ -364,7 +363,6 @@ class Response {
         
         $feature['abbr']  = $this->raw_data[$var];
         $feature['date']  = $this->raw_data[$var_date];
-        $feature['text']  = $boni_responses[$var];
         
         $history[] = $feature;
         
@@ -384,6 +382,13 @@ class Response {
   }
   
   
+  function getEscoreClass() {
+    
+    return $this->raw_data['eScoreClass'];
+    
+  }
+  
+  
   function isGreen() {
     
     if (isset($this->raw_data['eScoreValue'])) {
@@ -396,8 +401,7 @@ class Response {
         
         return false;
         
-      }
-      
+      } 
       
     } else {
       
