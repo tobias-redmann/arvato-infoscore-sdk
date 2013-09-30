@@ -252,11 +252,21 @@ class Infoscore{
     
     $result = curl_exec($ch);
     
-    var_dump(curl_error($ch));
-    
-    curl_close($ch);
-    
-    return $result;
+    if ($result !== false) {
+      
+      $raw_data = parse_str($result);
+      
+      return $raw_data;
+      
+    } else {
+      
+      $this->errors[] = 'Curl Error:  ' . curl_error($ch);
+      
+      curl_close($ch);
+      
+      return false;
+      
+    }
     
   }  
   
