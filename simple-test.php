@@ -45,7 +45,15 @@ if ($response !== false && $response->isValid()) {
     
   }
   
+  
+  var_dump($response->getAddressStatus());
+  
+  var_dump($response->getAddressCorrections());
+  
+  
 }
+
+
 
 
 ?>
