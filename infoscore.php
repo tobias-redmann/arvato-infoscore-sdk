@@ -388,6 +388,12 @@ class Response {
     
   }
   
+  function getRaw() {
+    
+    return $this->raw_data;
+    
+  }
+  
   
   function isGreen() {
     
