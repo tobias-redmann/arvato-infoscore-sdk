@@ -388,6 +388,33 @@ class Response {
     
   }
   
+  function getAddressStatus() {
+    
+    return $this->raw_data['AddressFeature'];
+  
+  }
+  
+  function getAddressCorrections() {
+    
+    
+    $address_fields = array('Street', 'House', 'City', 'Country', 'ZIP');
+    
+    $corrections = array();
+    
+    foreach($address_fields as $address_field) {
+      
+      if (isset($this->raw_data[$address_field])) {
+        
+        $corrections[$address_field] = $this->raw_data[$address_field];
+        
+      }
+      
+    }
+    
+    return $corrections;
+    
+  }
+  
   function getRaw() {
     
     return $this->raw_data;
